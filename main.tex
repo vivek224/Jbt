@@ -1,13 +1,9 @@
 \documentclass{beamer}
 \usepackage{inputenc}
-
 \usetheme{Luebeck}
 \usefonttheme{serif}
 \usecolortheme{rose}
 \useoutertheme{infolines}
-
-
-
 %\usetheme{CambridgeUS}
 %\usecolortheme[RGB={205,0,0}]{structure}
 %\setbeamertemplate{items}[triangle]
@@ -17,9 +13,8 @@
 \setbeamertemplate{frametitle}[default][center]
 
 \usepackage[T1]{fontenc}
-\usepackage{mathabx}
-\usepackage{mathpazo}
-\usepackage{eulervm} 
+%\usepackage{mathpazo}
+%\usepackage{eulervm} 
 \usepackage{tikz}
 
 %\usepackage[square,numbers]{natbib}
@@ -102,7 +97,7 @@
 %\usepackage{cite}
 %\usepackage[usenames,dvipsnames]{xcolor} 
 %\usepackage{scalefnt}
-\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+%\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
 \usepackage{outline}
 \usepackage{flushend}
 \usepackage{float}
@@ -120,7 +115,7 @@
 %\usepackage{lmodern}
 %TODO: Fix .
 
-%\usepackage[font=small]{caption}
+\usepackage[font=small]{caption}
 
 \DeclareCaptionLabelSeparator{horse}{:\quad} % change according to % your needs
 \captionsetup{
@@ -128,7 +123,7 @@
   figureposition = bottom % proper spacing between figure and caption
 } 
 
-%\setbeamertemplate{caption}[numbered] 
+\setbeamertemplate{caption}[numbered]
 
 \usepackage[fencedCode,inlineFootnotes,citations,definitionLists,hashEnumerators,smartEllipses,hybrid]{markdown}
 
@@ -155,11 +150,14 @@
 \begin{document}
 
 
-\markdownInput{talkabstract.md}
+
 
 \begin{frame} 
 \titlepage 
-\end{frame} 
+\end{frame}
+
+\markdownInput{./talkabstract.md}
+
 
 \section{Introduction and Problem}
 
@@ -178,7 +176,6 @@
 \markdownInput{./content/wlb.md}
 
 \markdownInput{./content/SoftwareArch.md}
-
 \markdownInput{./content/sop.md}
 
 \markdownInput{./content/nla.md}
@@ -200,8 +197,6 @@
 \markdownInput{./backMatter/thanks.md}
 \markdownInput{./backMatter/questions.md}
 \markdownInput{./backMatter/plugs.md}
-
-
 
 %\citep{adams1995hitchhiker}
 
