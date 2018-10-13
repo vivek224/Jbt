@@ -1,31 +1,219 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+\documentclass{beamer}
+\usepackage{inputenc}
 
-\title{J}
-\author{Vivek Kale}
-\date{October 2018}
+\usetheme{Luebeck}
+\usefonttheme{serif}
+\usecolortheme{rose}
+\useoutertheme{infolines}
 
-\usepackage{natbib}
+
+
+%\usetheme{CambridgeUS}
+%\usecolortheme[RGB={205,0,0}]{structure}
+%\setbeamertemplate{items}[triangle]
+%\setbeamertemplate{sections/subsections in toc}[square]
+
+\setbeameroption{show notes}\setbeamertemplate{note page}[plain]\def\notescolors{1}
+\setbeamertemplate{frametitle}[default][center]
+
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+\usepackage{mathpazo}
+\usepackage{eulervm} 
+\usepackage{tikz}
+
+%\usepackage[square,numbers]{natbib}
+\usepackage[final]{listings}
 \usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{url}
+
+% Watermarks
+\usepackage[printwatermark]{xwatermark}
+\newsavebox\mybox
+\savebox\mybox{\tikz[color=red,opacity=0.02]\node{DRAFT};}
+\newwatermark*[
+  allpages,
+  angle=45,
+  scale=6,
+ xpos=-20,
+  ypos=15
+]{\usebox\mybox}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92} 
+
+ \lstset{
+        language=C++,
+        basicstyle=\small\ttfamily, % Standardschrift %
+                                    % % TODO: consider making tiny to make  
+                                     % % things f
+         numbers=none,               % Ort der Zeilennummern           
+         numberstyle=\footnotesize\ttfamily,          % Stil der Zeilennummern       
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern  
+         numbersep=6pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs                     
+         extendedchars=true,         % 
+        breaklines=true,            % Zeilen werden Umgebrochen             
+        frame=single,
+         keywordstyle=[1]\textbf,    % Stil der Keywords                  
+         stringstyle=\ttfamily,
+         showspaces=false,           % Leerzeichen anzeigen ? 
+         showtabs=false,             % Tabs anzeigen ? 
+         showstringspaces=false,     % Leerzeichen in Strings anzeigen ?   
+         commentstyle=\color{green},
+         keywordstyle=\color{magenta},
+         numberstyle=\tiny\color{gray},
+         keywordstyle=\color{blue},
+         stringstyle=\color{red},
+         morecomment=[l][\color{magenta}]{\#},
+    captionpos=b,
+      numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false, 
+}
+
+\usepackage{beamerthemesplit} 
+\usepackage{graphics}
+\usepackage{graphicx}
+%\usepackage{comment} 
+
+\usepackage{biblatex}
+\usepackage{ulem}
+\usepackage{color}
+\usepackage{xspace}
+%\usepackage[colorlinks]{hyperref}
+%\usepackage[colorinlistoftodos]{todonotes}
+
+%\usepackage[twoside,citeonce(page),citeonce(chapter)]{footbib}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% used for checkmarks and xes
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{courier}
+%\usepackage{cite}
+%\usepackage[usenames,dvipsnames]{xcolor} 
+%\usepackage{scalefnt}
+\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+\usepackage{outline}
+\usepackage{flushend}
+\usepackage{float}
+\usepackage{subfig}
+
+%% Load the markdown package
+ 
+\usetikzlibrary{arrows,tikzmark,shadows}
+%\usetikzmarklibrary{listings} % for annotating code.
+
+% used for putting tables with data in slides 
+%\usepackage{pgfplotstable}
+%\usepackage{array}
+
+%\usepackage{lmodern}
+%TODO: Fix .
+
+%\usepackage[font=small]{caption}
+
+\DeclareCaptionLabelSeparator{horse}{:\quad} % change according to % your needs
+\captionsetup{
+  labelsep = horse,
+  figureposition = bottom % proper spacing between figure and caption
+} 
+
+%\setbeamertemplate{caption}[numbered] 
+
+\usepackage[fencedCode,inlineFootnotes,citations,definitionLists,hashEnumerators,smartEllipses,hybrid]{markdown}
+
+\markdownSetup{rendererPrototypes={
+ link = {\href{#2}{#1}},
+ headingThree = {\begin{frame}\frametitle{#1}},
+ headingFour = {\begin{block}{#1}},
+ horizontalRule = {\end{block}}
+}}
+
+%\markdownSetup{
+ % renderers = {
+ %   link     = {#1},        % Render a link as the link label.
+%    emphasis = {\emph{#1}}, % Render emphasis using `\emph`.
+%  }
+%}
+
+\newcommand{\comments}[1]{}
+
+\title{Easy-to-use Loop Scheduling to Optimize and Scale Applications for Supercomputers}
+\author[Presentation for LLNL]{Vivek Kale}
+\date{October 18, 2018}
 
 \begin{document}
 
-\maketitle
 
-\section{Introduction}
-There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable.
-There is another theory which states that this has already happened.
+\markdownInput{talkabstract.md}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1.7]{universe}
-\caption{The Universe}
-\label{fig:universe}
-\end{figure}
+\begin{frame} 
+\titlepage 
+\end{frame} 
+
+\section{Introduction and Problem}
+
+\markdownInput{./contents/example.md}
+\markdownInput{intro.md}
+
+\markdownInput{rlw.md} % related WOrk
+
+\markdownInput{./contents/pbm.md} % Problem statement 
+
+\section{Basic Loop Scheduling Strategies}
+
+\markdownInput{./contents/dyn.md}
+\markdownInput{./contents/csd.md} % CALU with stat/dynamic scheduling 
+
+\markdownInput{./contents/wlb.md}
+
+\markdownInput{./contents/SoftwareArch.md}
+
+\markdownInput{./contents/sop.md}
+
+\markdownInput{./contents/nla.md}
+\markdownInput{./contents/pcm.md}
+
+\section{Work on Novel Efficient Loop Scheduling with other Optimizations}
+\markdownInput{./contents/pbm.md}
+\markdownInput{./contents/psm.md}
+\markdownInput{./contents/uds.md}
+\markdownInput{./contents/dlt.md}
+\markdownInput{./contents/lws.md}
+\markdownInput{./contents/lsb.md}
 
 \section{Conclusion}
-``I always thought something was fundamentally wrong with the universe'' \citep{adams1995hitchhiker}
+\markdownInput{./backMatter/conclusion.md}
 
-\bibliographystyle{plain}
-\bibliography{references}
+\markdownInput{./backMatter/acknowledgements.md}
+
+\markdownInput{./backMatter/thanks.md}
+\markdownInput{./backMatter/questions.md}
+\markdownInput{./backMatter/plugs.md}
+
+
+
+%\citep{adams1995hitchhiker}
+
+
+\begin{frame}
+\renewcommand{\bibfont}{\footnotesize}
+\frametitle{Bibliography}
+
+%\bibliographystyle{apalike}
+\bibliography{bibliography}
+
+\end{frame}
+
+
 \end{document}
