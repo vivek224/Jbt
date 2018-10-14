@@ -1,5 +1,4 @@
 
-% TODO: add citations here, can use latex slides. 
 
 ### Related Work 
 
@@ -8,3 +7,7 @@
 - DPLASMA.
 - Hybrid MPI+OpenMP or MPI+X	
 - Co-scheduling: Schedule all events together to make only some timesteps be impacted by noise, but can’t co-schedule all events.
+
+\end{frame}
+
+% TODO: add citations here, can use latex slides.

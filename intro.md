@@ -1,4 +1,3 @@
-
 ### Motivating Example Code Structure
 
 ```C++, caption=Example MPI Application
@@ -38,6 +37,7 @@ int main(int argc, char** argv)
    temp = w; w = u; u = temp;
    MPI_Allreduce();
 }
+
 ```
 
 \end{frame}
@@ -89,11 +89,27 @@ Start;
 - Note each core has exactly the same work to do*
 - Hypothesis: transient "noise" from OS, and hardware variability
 
-
 \end{frame}
 
 
 ### Transient Load Imbalance and its Potential Mitigation 
 
+\end{frame} 
 
 
+### Noise Amplification Problem
+
+
+\end{frame} 
+
+
+### Within-node Persistent Load Imbalance
+
+
+\end{frame} 
+
+
+### Comparison of Inter- and Intra-node Load Imb.
+
+
+\end{frame} 

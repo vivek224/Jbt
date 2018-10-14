@@ -12,7 +12,6 @@
 
 ### Issues to Consider
 
-
 1. Modifiers to clause: non-monotonic
 
  - Problem: How do we handle loop having indices that are non-monotonic?

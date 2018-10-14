@@ -43,24 +43,7 @@
 
 \end{frame}
 
-
-### Load Balancing + Loop Scheduling Technique
-
-\begin{columns}
-\begin{column}{0.5\columnwidth}
-
-- Modify across node load balancing in Charm++ to assign load to one PE in each node.
-- Use my loop scheduling strategies (in CkLoop) to optimize within node performance.
-
-\end{column}
-
-\end{columns}
-
-
-\end{frame} 
-
-
-
+### CHarm++
 
 \begin{column}{0.5\textwidth}
 \begin{figure}[ht!] \label{fig:charmBeforeAndAfterLdBCkLoop}
@@ -73,7 +56,23 @@
 \end{figure}
 \end{column}
 \end{columns}
+
 \end{frame}
+
+
+### Load Balancing + Loop Scheduling Technique
+
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+
+- Modify across node load balancing in Charm++ to assign load to one PE in each node.
+- Use my loop scheduling strategies (in CkLoop) to optimize within node performance.
+
+\end{column}
+\end{columns}
+
+\end{frame} 
+
 
 ### Key Idea of Our Solution
 
@@ -96,8 +95,7 @@
                         \subfloat[\tiny Mixed Scheduling]
  {\includegraphics[width=.24\columnwidth]{images/threadedCompRegion-hybrid-withChare}}
     \end{center}
-    \caption{\label{fig:statDynSched} \tiny Mixed static/dynamic scheduling within a chare, i.e., a
-      Charm++ object.}
+    \caption{\label{fig:statDynSched} \tiny Mixed static/dynamic scheduling within a chare, i.e., Charm++ object.}
   \end{figure}
 \end{column}
 \end{columns}
@@ -114,11 +112,12 @@
 \end{center}
 \caption{\label{fig:motexample2} \footnotesize Load imbalances across nodes (left) and across cores (right) when the greedy load balancing strategy is used.}
 \end{figure}
-\begin{itemize}
-\tiny \item \tiny Using no load balancing, node 2 is heavily overloaded for iterations 8 and 9. Hence, we need load balancing to distribute the load across nodes.
-\item \tiny Inter-node load balancing using GreedyLB balances load across nodes well.
-\item \tiny Balancing load across nodes using GreedyLB still leaves load imbalance in the cores within a node.
-\end{itemize}
+
+- \tiny Using no load balancing, node 2 is heavily overloaded for iterations 8 and 9. Hence, we need load balancing to distribute the load across nodes.
+- \tiny Inter-node load balancing using GreedyLB balances load across nodes well.
+- \tiny Balancing load across nodes using GreedyLB still leaves load imbalance in the cores within a node.
+
+
 \end{frame}
 
 ### Additional Baseline Results
@@ -161,6 +160,7 @@ ation.
               \end{tabular}
               \caption{\label{tab:pmta} \tiny Terms in implementation}
             \end{table}
+            
 \end{frame}
 
 ### Adaptive Loop Scheduling 
@@ -219,11 +219,24 @@ tion region as a parameter to the function.
 \end{frame}
 
 
-### Load Balancing and Loop Scheduling: Conclusion 
+%### Load Balancing and Loop Scheduling: Conclusion 
 
-1. Need sophisticated loop scheduling in Charm++.
-2. Described a technique and implementation to improve performance of applications.
-3. Using our technique and implementation, we demonstrate performance improvement of 17.2\%.
-4. For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling.
+%1. Need sophisticated loop scheduling in Charm++.
+%2. Described a technique and implementation to improve performance of applications.
+%3. Using our technique and implementation, we demonstrate performance improvement of %17.2\%.
+%4. For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling.
 
 \end{frame}
+
+
+
+### Load Balancing and Loop Scheduling: Conclusion 
+
+- Connection to ParaDis.
+- Need sophisticated loop scheduling in Charm++. 
+- Described a technique and implementation to improve performance of applications.
+- Using our technique and implementation, we demonstrate performance improvement of 17.2%.
+For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling. 
+- Considering a proposal with Harshitha Menon from LLNL in the last the months for new strategies and sophisticated implementation.
+
+\end{frame} 
