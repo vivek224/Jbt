@@ -113,3 +113,61 @@ Start;
 
 
 \end{frame} 
+
+
+
+
+\begin{frame}[label=hybridstatdyn]
+\frametitle{Hybrid Static/Dynamic Scheduling}
+\begin{columns}
+  \column{0.5\columnwidth}
+  \vspace*{-0.2in}
+
+\lstinputlisting{./listings/threadedCompRegion-static.c}
+  \column{0.5\columnwidth}
+%  \includegraphics[scale=0.15]{./images/legend-dynamic}\\                                                                                                              
+ \vspace*{-0.2in}
+  \begin{center}
+    \includegraphics[scale=0.31]{images/threadedCompRegion-static}
+  \end{center}
+  \vspace*{-0.4in}
+  \begin{center}
+    \tiny Susceptible to imbalance.
+  \end{center}
+\end{columns}
+\begin{columns}
+\column{0.5\columnwidth}
+\vspace*{-0.15in}
+\begin{figure}
+\lstinputlisting{./listings/threadedCompRegion-dynamic.c}
+\end{figure}
+\column{0.5\columnwidth}
+  \begin{center}
+    \includegraphics[scale=0.31]{images/threadedCompRegion-dynamic}
+  \end{center}
+\vspace*{-0.3in}
+\begin{center}
+{\tiny Scheduler overhead stretches time.}
+\end{center}
+\end{columns}
+\begin{columns}
+\column{0.5\columnwidth}
+%TODO: fix code  to be hybrid sched                                                                                                                                     
+\vspace*{-0.1in}
+\begin{figure}
+\lstinputlisting{./listings/threadedCompRegion-hybrid.c}
+\end{figure}
+\column{0.5\columnwidth}
+\begin{center}
+\includegraphics[scale=0.31]{./images/threadedCompRegion-hybrid}
+\end{center}
+\vspace*{-0.3in}
+\begin{center}
+{\tiny Can reduce imbalance and sched ovhd. simultaneously.}
+
+%\comments{through \hyperlink{expTunedSF}{tuning} static fraction.}                                                                                                     
+
+\end{center}
+\end{columns}
+
+\end{frame}
