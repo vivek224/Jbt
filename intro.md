@@ -1,7 +1,7 @@
 
 ### Motivating Example Code Structure
 
-```C, caption='Example MPI Application'
+```C++, caption=Example MPI Application
 
 #include <mpi.h>
 int main(int argc, char** argv)
@@ -17,6 +17,7 @@ int main(int argc, char** argv)
   //output
    MPI_Finalize();	
 }
+
 ```
 
 \end{frame}
@@ -25,6 +26,7 @@ int main(int argc, char** argv)
 ### Motivating Example Code: 2D Laplace
 
 ```C++, caption=An Instance of the Pattern
+
 int main(int argc, char** argv)
 {
 ..
@@ -41,11 +43,9 @@ int main(int argc, char** argv)
 \end{frame}
 
 
-
-
 ### Motivating Example Code: 2D Laplace with OpenMP
 
-``` C++ 
+```C++, caption=
 #include <mpi.h>
 #include <omp.h>
 

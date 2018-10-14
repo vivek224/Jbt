@@ -1,10 +1,10 @@
 all: vivek-jbt.pdf
 
 vivek-jbt.pdf: main.tex
-	sudo pdflatex main.tex
-	sudo bibtex main
-	sudo pdflatex main
-	sudo pdflatex main
+	pdflatex --shell-escape main.tex
+	bibtex main
+	pdflatex main
+	pdflatex main
 
 clean:
 	sudo rm -f vivek-jbt.pdf
