@@ -24,6 +24,8 @@ int main(int argc, char** argv)
 
 ### Motivating Example Code: 2D Laplace
 
+\lstset{basicstyle=\footnotesize\ttfamily}
+
 ```C++, caption=An Instance of the Pattern
 
 int main(int argc, char** argv)
@@ -45,6 +47,7 @@ int main(int argc, char** argv)
 
 ### Motivating Example Code: 2D Laplace with OpenMP
 
+\lstset{basicstyle=\footnotesize\ttfamily}
 ```C++, caption=
 #include <mpi.h>
 #include <omp.h>
@@ -68,7 +71,10 @@ Start;
 
 \end{frame}
 
+
+
 ### 3D Stencil Performance of Code on One Node
+
 
 %![alt text][histoStatic]
 
@@ -80,12 +86,14 @@ Start;
 
 %![](./plots/IterTimingsHisto-static.png =250x)
 
-\begin{figure}[ht!]
+\begin{figure}
+%\label{fig:iterHisto}
 \includegraphics[scale=0.45]{./plots/IterTimingsHisto-static.png}
-\caption{\label{fig:iterHisto}  Spread of timings of Outer Iterations of 3D Stencil.} 
+%\caption{\label{fig:iterHisto}  Spread of timings of Outer Iterations of 3D Stencil.} 
 \end{figure}
 
-- Note two peaks; long tail (max at 9.5; min at 5.75)
+
+- Note two peaks; long tail (max at 9.5; min at 5.75).
 - Note each core has exactly the same work to do*
 - Hypothesis: transient "noise" from OS, and hardware variability
 
@@ -113,3 +121,12 @@ Start;
 
 
 \end{frame} 
+
+
+### So, can dynamic load balancing fix this?
+
+- Dynamic load balancing within a node has potential to mitigate imbalances, if it can be done efficiently
+- OpenMP supports dynamic load balancing
+- Let us use it!
+
+\end{frame}

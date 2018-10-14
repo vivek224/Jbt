@@ -17,21 +17,12 @@
 
 \usepackage[final]{listings}
 \usepackage{graphicx}
+\usepackage{graphics}
 \usepackage{color}
 \usepackage{xcolor}
 \usepackage{url}
 
-% Watermarks
-%\usepackage[printwatermark]{xwatermark}
-%\newsavebox\mybox
-%\savebox\mybox{\tikz[color=red,opacity=0.02]\node{DRAFT};}
-%\newwatermark*[
-%  allpages,
-%  angle=45,
-%  scale=6,
-% xpos=-20,
-%  ypos=15
-%]{\usebox\mybox}
+
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -40,7 +31,7 @@
 
 \lstset{
         language=C++,
-        basicstyle=\small\ttfamily, % Standardschrift %
+        basicstyle=\footnotesize\ttfamily, % Standardschrift %
                                     % % TODO: consider making tiny to make  
                                      % % things f
          numbers=none,               % Ort der Zeilennummern           
@@ -68,11 +59,10 @@
          showspaces=false,
 }
 
-\usepackage{beamerthemesplit} 
-\usepackage{graphics}
-\usepackage{biblatex}
+\usepackage{beamerthemesplit}
+%\usepackage{biblatex}
+\usepackage{natbib}
 \usepackage{ulem}
-\usepackage{color}
 \usepackage{xspace}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -87,10 +77,11 @@
 \usepackage{flushend}
 \usepackage{float}
 \usepackage{subfig}
-\usepackage{subfloat}
 
 %% Load the markdown package 
 \usetikzlibrary{arrows,tikzmark,shadows}
+
+\usepackage{subfigure}
 
 % used for putting tables with data in slides 
 %\usepackage{pgfplotstable}
@@ -142,8 +133,8 @@
 
 \section{Introduction and Problem}
 
-\markdownInput{./content/example.md}
-\markdownInput{intro.md}
+%\markdownInput{./content/example.md}
+%\markdownInput{intro.md}
 \markdownInput{rlw.md} % related WOrk
 
 \markdownInput{./content/pbm.md} % Problem statement 
@@ -163,7 +154,7 @@
 \markdownInput{./content/uds.md}
 \markdownInput{./content/dlt.md}
 \markdownInput{./content/lws.md}
-\markdownInput{./content/lsb.md}
+%\markdownInput{./content/lsb.md}
 
 \section{Conclusion}
 \markdownInput{./backMatter/conclusion.md}
@@ -179,7 +170,7 @@
 \renewcommand{\bibfont}{\footnotesize}
 \frametitle{Bibliography}
 
-%\bibliographystyle{apalike}
+\bibliographystyle{abbrvnat}
 \bibliography{bibliography}
 
 \end{frame}

@@ -1,6 +1,7 @@
 
 ### An Implementation of the Static/Dynamic Schedule with UDS
 
+\lstset{basicstyle=\tiny\ttfamily}
 \begin{figure}
     \centering
     \lstinputlisting{listings/openmpudsdyndatstruct.c}
