@@ -1,3 +1,5 @@
+
+
 ### Synergistic Load Balancing and Loop Scheduling
 
 - So far, my work focused on within node load balancing
@@ -10,99 +12,73 @@
 
 ### An Intelligent Runtime System for Clusters of SMPs
 
-\begin{columns}
-\begin{column}{0.5\columnwidth}
-  \begin{itemize}
- \small \item \small An adaptive runtime system like Charm++ intelligently balances computational work periodically.
-  \item \small Two issues exist when using a basic Charm++ scheduling scheme.
-    \begin{enumerate}
-    \small \item \small Challenge of the cost of over-decomposition.
-    \item \small Challenge and opportunity to exploit multi-core nodes to mitigate imbalance.
-    \end{enumerate}
-    \item We can address both challenges by:
-    \begin{enumerate}
-    \small \item \small Having Charm++'s load balancer assign Charm++ objects, i.e., chares, to nodes.% (instead of cores).                                             
-    \item \small Using loop parallelism to distribute work within a node.
-    \end{enumerate}
-  \end{itemize}
-\end{column}
+- An adaptive runtime system like Charm++ intelligently balances computational work periodically.
+- Two issues exist when using a basic Charm++ scheduling scheme.    
+  1. Challenge of the cost of over-decomposition.
+  2. Challenge and opportunity to exploit multi-core nodes to mitigate imbalance.
+  
+- We can address both challenges by:
+  1. Having Charm++'s load balancer assign Charm++ objects, i.e., chares, to nodes.% (instead of cores).
+  2. Using loop parallelism to distribute work within a node.
 
-\begin{column}{0.5\columnwidth}
-  \begin{figure}[ht!]
-    \begin{center}
-      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-manyChares}\\
-      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-fewChares}
-      \label{fig:charmcklooptimeline}
-    \end{center}
-    \caption{\label{fig:charmcklooptimeline}\small Timelines using Charm++-only for default (left) and a mode where the number of chares per node\\ is reduced (right)
- }
 
-  \end{figure}
-\end{column}
-\end{columns}
-
-\end{frame}
-
-### CHarm++
-
-\begin{column}{0.5\textwidth}
-\begin{figure}[ht!] \label{fig:charmBeforeAndAfterLdBCkLoop}
-  \begin{center}
-    \includegraphics[width=.8\columnwidth]{images/charmLdbWithLoopwCharmonly-unbalanced}\\
-    \includegraphics[width=.8\columnwidth]{images/charmLdbWithLoopwCharmonly-balanced}
-  \end{center}
-  \caption{\label{fig:charmBeforeAndAfterLdBCkLoop} \small Timelines for execution of a code without (left) and with (right) Charm++ load balancing.}
-  %\\ A green rectangle on a non-zero core on a node corresponds to loop iterations spawned from core 0.                                                                
-\end{figure}
-\end{column}
-\end{columns}
+%  \begin{figure}
+%    \begin{center}
+%      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-manyChares}
+%      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-fewChares}
+%      \label{fig:charmcklooptimeline}
+%    \end{center}
+%    \caption{\label{fig:charmcklooptimeline}\small Timelines using Charm++-only for default (left) and a mode where the number of chares per node is reduced (right)}
+%  \end{figure}
 
 \end{frame}
 
 
-### Load Balancing + Loop Scheduling Technique
+### Charm
 
-\begin{columns}
-\begin{column}{0.5\columnwidth}
+%\begin{figure}[ht!]
+% \label{fig:charmBeforeAndAfterLdBCkLoop}
+%  \begin{center}
+    %\includegraphics[width=.8\columnwidth]{images/charmLdbWithLoopwCharmonly-unbalanced}
+    %\includegraphics[width=.8\columnwidth]{images/charmLdbWithLoopwCharmonly-balanced}
+%  \end{center}
+%  \caption{\label{fig:charmBeforeAndAfterLdBCkLoop} \small Timelines for execution of a code without (left) and with (right) Charm++ load balancing.}
+  % A green rectangle on a non-zero core on a node corresponds to loop iterations spawned from core 0.
+%\end{figure}
+
+\end{frame}
+
+
+### Load Balancing and Loop Scheduling Technique
 
 - Modify across node load balancing in Charm++ to assign load to one PE in each node.
-- Use my loop scheduling strategies (in CkLoop) to optimize within node performance.
+- Use my loop scheduling strategies in CkLoop to optimize within node performance.
 
-\end{column}
-\end{columns}
-
-\end{frame} 
+\end{frame}
 
 
 ### Key Idea of Our Solution
 
-\begin{columns}
-\begin{column}{0.5\columnwidth}
-\begin{enumerate}
- \item Modify Charm++ RTS to assign chares to core 0 of each node only.
- \item Reduce the number of chares per PE.
- \item Adjust parameters of within-node loop scheduler,e.g., vary
-  static fraction, based on parameters of Charm++.
-\item Tune Charm++ RTS parameters to work with adjustments of within-node loop scheduling.
-\end{enumerate}
-\end{column}
-\begin{column}{0.5\columnwidth}
-  \begin{figure}
-    \label{fig:statDynSched}
-    \begin{center}
-      \subfloat[\tiny Static Scheduling.]{\includegraphics[width=.20\columnwidth]{./images/threadedCompRegion-static-withChare}}\hspace*{0.1in}
-               \subfloat[\tiny Dynamic Scheduling.] {\includegraphics[width=.27\columnwidth]{./images/threadedCompRegion-dynamic-withChare}}\hspace*{0.1in}
-                        \subfloat[\tiny Mixed Scheduling]
- {\includegraphics[width=.24\columnwidth]{images/threadedCompRegion-hybrid-withChare}}
-    \end{center}
-    \caption{\label{fig:statDynSched} \tiny Mixed static/dynamic scheduling within a chare, i.e., Charm++ object.}
-  \end{figure}
-\end{column}
-\end{columns}
+1. Modify Charm++ RTS to assign chares to core 0 of each node only.
+2. Reduce the number of chares per PE.
+3. Adjust parameters of within-node loop scheduler,e.g., vary dynamic fraction, based on parameters of Charm++.
+4. Tune Charm++ RTS parameters to work with adjustments of within-node loop scheduling.
+
+  %\begin{figure}
+  %  \label{fig:statDynSched}
+  %  \begin{center}
+          %\subfloat[\tiny Static Scheduling.]{\includegraphics[width=.20\columnwidth]{./images/threadedCompRegion-static-withChare}}\hspace*{0.1in}
+          %\subfloat[\tiny Dynamic Scheduling.]{\includegraphics[width=.27\columnwidth]{./images/threadedCompRegion-dynamic-withChare}}\hspace*{0.1in}
+          %\subfloat[\tiny Mixed Scheduling]{\includegraphics[width=.24\columnwidth]{images/threadedCompRegion-hybrid-withChare}}
+ %   \end{center}
+ %   \caption{\label{fig:statDynSched} \tiny Mixed static/dynamic scheduling within a chare, i.e., Charm++ object.}
+ % \end{figure}
 
 \end{frame}
 
-\begin{frame}{Baseline Results and Analysis}{Existence of Within-node Load Imbalance through Heat Maps}
+
+### Baseline Results and Analysis: Existence of Within-node Load Imbalance through Heat Maps
+
 \begin{figure}[ht!]
 \begin{center}
 {\includegraphics[width=.25\columnwidth]{images/nolb_node_load_with_iter}}
@@ -117,8 +93,8 @@
 - \tiny Inter-node load balancing using GreedyLB balances load across nodes well.
 - \tiny Balancing load across nodes using GreedyLB still leaves load imbalance in the cores within a node.
 
-
 \end{frame}
+
 
 ### Additional Baseline Results
 
@@ -131,6 +107,7 @@
 
 \end{frame}
 
+
 ### Proposed Set of Techniques
   
 1. We decide on the combinations of advanced loop scheduling and advanced load balancing strategies to use.
@@ -140,10 +117,10 @@ ation.
 
 \end{frame}
 
+
 ### Performance Model for Load Balancing and Loop Scheduling
 
-            % first row is the table of parameters                               
-            \begin{table}[h!t]
+ \begin{table}[h!t]
               \centering
               \label{tab:pmta}
               \begin{tabular}{|l|l|}
@@ -159,15 +136,15 @@ ation.
                   \tiny$load_i$ & \tiny Load on the $i^{th}$ core of a node on an arbitrary timestep                             \\ \hline
               \end{tabular}
               \caption{\label{tab:pmta} \tiny Terms in implementation}
-            \end{table}
-            
+   \end{table}
+          
 \end{frame}
+
 
 ### Adaptive Loop Scheduling 
 
 - We refer to this scheduling strategy as \emph{adaptive loop scheduling} and use a parametrized version of it to schedule loop iterations of a chare to cores.
-- The best-performing collection of scheduler parameter values is the best-performing one, on average, for each chare. An optimal collection of scheduler parameter\
- values, in isolation, isn't necessarily the best-performing, given an arbitrary collection of parameter values for the load balancer.
+- The best-performing collection of scheduler parameter values is the best-performing one, on average, for each chare. An optimal collection of scheduler parameter values, in isolation, isn't necessarily the best-performing, given an arbitrary collection of parameter values for the load balancer.
 - Thus, our technique is to search for the collection of parameter values for the scheduler together with those for the load balancer that obtains best performance.
 
 \end{frame}
@@ -175,12 +152,13 @@ ation.
 
 \begin{frame}{Implementation}{Front-end Code}
 
+\begin{figure}
 \label{code:dotpCharmckhyb}
 \lstinputlisting{./listings/old-dotpcharmckhyb.cc}\hspace*{-1.9in}
 \vspace*{-0.8in}\caption{\label{code:dotPCharmckhyb}{\tiny  \label{code:dotpCharmckhyb} Dot product code's modification using Charm++ with CkLoop.}}
 \end{figure}
 
-- Figure~\ref{code:dotpcharmckhyb} shows the user code with the adapted CkLoop library using the function {\tt CkParLoop()} for the computational region of the program. 
+- Figure~\ref{code:dotpcharmckhyb} shows the user code with the adapted CkLoop library using the function {\tt CkParLoop()} for the computational region of the program.
 - The user creates a kernel for the computation region and replaces the region with a call to {\tt CkParLoop()} having the name of the kernel for the computa
 tion region as a parameter to the function.
 - Here, the user calls the function on thread 0 providing the kernel to be called, the range of iterations of the loop and the number of chunks used in the loop.
@@ -190,19 +168,18 @@ tion region as a parameter to the function.
 \end{frame}
 
 
-
-
 ### Results
 
 \begin{figure}[ht!]
           \begin{center}
-            \subfloat[\tiny Dot Product on 4 nodes of Stampede.]{\includegraphics[width=.45\columnwidth]{plots/dotProd-4nodes-bw}} %TODO: replace with dot product results                                                                                                                                                    
-            \subfloat[\tiny Particle-in-Cell on 4 nodes of Blue Waters.]{\includegraphics[width=.45\columnwidth]{plots/PIC-4nodes-bw}}
+         \subfloat[\tiny Dot Product on 4 nodes of Stampede.]{\includegraphics[width=.45\columnwidth]{plots/dotProd-4nodes-bw}}
+ 	    \subfloat[\tiny Particle-in-Cell on 4 nodes of Blue Waters.]{\includegraphics[width=.45\columnwidth]{plots/PIC-4nodes-bw}}
           \end{center}
-          \caption{\tiny Execution times of scientific applications on multi-core clusters.}\label{fig:scalability-results-PIC-BW}
+          \caption{\tiny Execution times of scientific applications on multi-core clusters.}
+	  \label{fig:scalability-results-PIC-BW}
         \end{figure}
 
-- For dot product using 64 chares, a static fraction of 75\% with a chunk size of 8 gives the best performance, showing utility of adaptive loop scheduling.
+%- For dot product using 64 chares, a static fraction of 75\% with a chunk size of 8 gives the best performance, showing utility of adaptive loop scheduling.
 - PIC using modified inter-node load balancing with adaptive loop scheduling is 19.13\% faster than PIC using adaptive scheduling without load balancing.
 - Synergistic performance improvements using combination of inter-node and intra-node load balancing.
 
@@ -226,8 +203,7 @@ tion region as a parameter to the function.
 %3. Using our technique and implementation, we demonstrate performance improvement of %17.2\%.
 %4. For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling.
 
-\end{frame}
-
+% \end{frame}
 
 
 ### Load Balancing and Loop Scheduling: Conclusion 
@@ -236,7 +212,7 @@ tion region as a parameter to the function.
 - Need sophisticated loop scheduling in Charm++. 
 - Described a technique and implementation to improve performance of applications.
 - Using our technique and implementation, we demonstrate performance improvement of 17.2%.
-For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling. 
+- For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling. 
 - Considering a proposal with Harshitha Menon from LLNL in the last the months for new strategies and sophisticated implementation.
 
 \end{frame} 
