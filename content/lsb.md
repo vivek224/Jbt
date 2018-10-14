@@ -8,12 +8,40 @@
 \end{frame}
 
 
-### Load Balance Heat Maps for Lassen
+### An Intelligent Runtime System for Clusters of SMPs
 
-\begin{figure}
-\includegraphics[scale=0.5]{     } 
-\end{figure}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+  \begin{itemize}
+ \small \item \small An adaptive runtime system like Charm++ intelligently balances computational work periodically.
+  \item \small Two issues exist when using a basic Charm++ scheduling scheme.
+    \begin{enumerate}
+    \small \item \small Challenge of the cost of over-decomposition.
+    \item \small Challenge and opportunity to exploit multi-core nodes to mitigate imbalance.
+    \end{enumerate}
+    \item We can address both challenges by:
+    \begin{enumerate}
+    \small \item \small Having Charm++'s load balancer assign Charm++ objects, i.e., chares, to nodes.% (instead of cores).                                             
+    \item \small Using loop parallelism to distribute work within a node.
+    \end{enumerate}
+  \end{itemize}
+\end{column}
 
+\begin{column}{0.5\columnwidth}
+  \begin{figure}[ht!]
+    \begin{center}
+      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-manyChares}\\
+      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-fewChares}
+      \label{fig:charmcklooptimeline}
+    \end{center}
+    \caption{\label{fig:charmcklooptimeline}\small Timelines using Charm++-only for default (left) and a mode where the number of chares per node\\ is reduced (right)
+ }
+
+  \end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
 
 
 ### Load Balancing + Loop Scheduling Technique
@@ -29,9 +57,134 @@
 \end{columns}
 
 
-
-
-
-
-
 \end{frame} 
+
+
+
+
+\begin{column}{0.5\textwidth}
+\begin{figure}[ht!] \label{fig:charmBeforeAndAfterLdBCkLoop}
+  \begin{center}
+    \includegraphics[width=.8\columnwidth]{images/charmLdbWithLoopwCharmonly-unbalanced}\\
+    \includegraphics[width=.8\columnwidth]{images/charmLdbWithLoopwCharmonly-balanced}
+  \end{center}
+  \caption{\label{fig:charmBeforeAndAfterLdBCkLoop} \small Timelines for execution of a code without (left) and with (right) Charm++ load balancing.}
+  %\\ A green rectangle on a non-zero core on a node corresponds to loop iterations spawned from core 0.                                                                
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+### Key Idea of Our Solution
+
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{enumerate}
+ \item Modify Charm++ RTS to assign chares to core 0 of each node only.
+ \item Reduce the number of chares per PE.
+ \item Adjust parameters of within-node loop scheduler,e.g., vary
+  static fraction, based on parameters of Charm++.
+\item Tune Charm++ RTS parameters to work with adjustments of within-node loop scheduling.
+\end{enumerate}
+\end{column}
+\begin{column}{0.5\columnwidth}
+  \begin{figure}
+    \label{fig:statDynSched}
+    \begin{center}
+      \subfloat[\tiny Static Scheduling.]{\includegraphics[width=.20\columnwidth]{./images/threadedCompRegion-static-withChare}}\hspace*{0.1in}
+               \subfloat[\tiny Dynamic Scheduling.] {\includegraphics[width=.27\columnwidth]{./images/threadedCompRegion-dynamic-withChare}}\hspace*{0.1in}
+                        \subfloat[\tiny Mixed Scheduling]
+ {\includegraphics[width=.24\columnwidth]{images/threadedCompRegion-hybrid-withChare}}
+    \end{center}
+    \caption{\label{fig:statDynSched} \tiny Mixed static/dynamic scheduling within a chare, i.e., a
+      Charm++ object.}
+  \end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Baseline Results and Analysis}{Existence of Within-node Load Imbalance through Heat Maps}
+\begin{figure}[ht!]
+\begin{center}
+{\includegraphics[width=.25\columnwidth]{images/nolb_node_load_with_iter}}
+{\includegraphics[width=0.25\columnwidth]{plots/greedylb_node_load_with_iter__2_.pdf}}\\
+{\includegraphics[width=0.25\columnwidth]{images/nolb_pe_load_with_iter}}
+{\includegraphics[width=0.25\columnwidth]{plots/greedylb_pe_load_with_iter}}
+\end{center}
+\caption{\label{fig:motexample2} \footnotesize Load imbalances across nodes (left) and across cores (right) when the greedy load balancing strategy is used.}
+\end{figure}
+\begin{itemize}
+\tiny \item \tiny Using no load balancing, node 2 is heavily overloaded for iterations 8 and 9. Hence, we need load balancing to distribute the load across nodes.
+\item \tiny Inter-node load balancing using GreedyLB balances load across nodes well.
+\item \tiny Balancing load across nodes using GreedyLB still leaves load imbalance in the cores within a node.
+\end{itemize}
+\end{frame}
+
+### Additional Baseline Results
+
+\begin{figure}
+ \label{fig:addbr}
+    \centering
+  \includegraphics[scale=0.3]{plots/additionalBaselineResults.png}
+  \caption{\label{fig:addbr}Baseline Results for Lassen Using Charm++ + OpenMP implementation shown in the middle.}
+\end{figure}
+
+\end{frame}
+
+### Proposed Set of Techniques
+  
+1. We decide on the combinations of advanced loop scheduling and advanced load balancing strategies to use.
+2. We either experimentally tune or use an automated technique to adjust parameters of load balancing and loop scheduler together to improve performance of applic\
+ation.
+3. We then consider advanced load balancing and loop scheduling strategies that can help for the combined load balancing and loop scheduling technique.
+
+\end{frame}
+
+### Performance Model for Load Balancing and Loop Scheduling
+
+            % first row is the table of parameters                               
+            \begin{table}[h!t]
+              \centering
+              \label{tab:pmta}
+              \begin{tabular}{|l|l|}
+                \hline
+                \tiny$t_1$    & \tiny Duration of a loop iteration\\ %iteration on one core \\
+                \hline
+                \tiny$T_p$    & \begin{tabular}[c]{@{}l@{}}\tiny Total execution time of a threaded computation region\vspace*{-0.3in} \\ \tiny consisting of $N$ loop \iterations on $p$ cores\end{tabular} \\ \hline
+%             \tiny$q$      & \tiny Scheduler's dequeue overhead of a loop iteration                                                                 \
+\\ \hline
+                  %             \tiny$d$  & \tiny Time for executing an iteration dynamically
+                  \\ \hline
+                  \tiny$\delta$ & \tiny Expected cost of load imbalance on a node to the application                                         \\ \hline
+                  \tiny$load_i$ & \tiny Load on the $i^{th}$ core of a node on an arbitrary timestep                             \\ \hline
+              \end{tabular}
+              \caption{\label{tab:pmta} \tiny Terms in implementation}
+            \end{table}
+\end{frame}
+
+### Adaptive Loop Scheduling 
+
+- We refer to this scheduling strategy as \emph{adaptive loop scheduling} and use a parametrized version of it to schedule loop iterations of a chare to cores.
+- The best-performing collection of scheduler parameter values is the best-performing one, on average, for each chare. An optimal collection of scheduler parameter\
+ values, in isolation, isn't necessarily the best-performing, given an arbitrary collection of parameter values for the load balancer.
+- Thus, our technique is to search for the collection of parameter values for the scheduler together with those for the load balancer that obtains best performance.
+
+\end{frame}
+
+
+\begin{frame}{Implementation}{Front-end Code}
+
+\label{code:dotpCharmckhyb}
+\lstinputlisting{./listings/old-dotpcharmckhyb.cc}\hspace*{-1.9in}
+\vspace*{-0.8in}\caption{\label{code:dotPCharmckhyb}{\tiny  \label{code:dotpCharmckhyb} Dot product code's modification using Charm++ with CkLoop.}}
+\end{figure}
+
+- Figure~\ref{code:dotpcharmckhyb} shows the user code with the adapted CkLoop library using the function {\tt CkParLoop()} for the computational region of the program. 
+- The user creates a kernel for the computation region and replaces the region with a call to {\tt CkParLoop()} having the name of the kernel for the computa
+tion region as a parameter to the function.
+- Here, the user calls the function on thread 0 providing the kernel to be called, the range of iterations of the loop and the number of chunks used in the loop.
+- The user specifies a loop history variable that has a field for the static fraction within it.
+- The lines of code in the user code with the library is 3\% more than the original user code.
+
+\end{frame}
