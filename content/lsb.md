@@ -188,3 +188,42 @@ tion region as a parameter to the function.
 - The lines of code in the user code with the library is 3\% more than the original user code.
 
 \end{frame}
+
+
+
+
+### Results
+
+\begin{figure}[ht!]
+          \begin{center}
+            \subfloat[\tiny Dot Product on 4 nodes of Stampede.]{\includegraphics[width=.45\columnwidth]{plots/dotProd-4nodes-bw}} %TODO: replace with dot product results                                                                                                                                                    
+            \subfloat[\tiny Particle-in-Cell on 4 nodes of Blue Waters.]{\includegraphics[width=.45\columnwidth]{plots/PIC-4nodes-bw}}
+          \end{center}
+          \caption{\tiny Execution times of scientific applications on multi-core clusters.}\label{fig:scalability-results-PIC-BW}
+        \end{figure}
+
+- For dot product using 64 chares, a static fraction of 75\% with a chunk size of 8 gives the best performance, showing utility of adaptive loop scheduling.
+- PIC using modified inter-node load balancing with adaptive loop scheduling is 19.13\% faster than PIC using adaptive scheduling without load balancing.
+- Synergistic performance improvements using combination of inter-node and intra-node load balancing.
+
+\end{frame}
+
+
+
+### Related Work: Combining Load Balancing and Loop Scheduling
+
+- Habanero\cite{Habanero}: library with support for data locality within node
+- MPI+OpenMP\cite{MPIOpenMP}: basic hybrid parallel programming model.
+- OmpSS\cite{ompss}: library for extensible loop scheduling schemes.
+
+\end{frame}
+
+
+### Load Balancing and Loop Scheduling: Conclusion 
+
+1. Need sophisticated loop scheduling in Charm++.
+2. Described a technique and implementation to improve performance of applications.
+3. Using our technique and implementation, we demonstrate performance improvement of 17.2\%.
+4. For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling.
+
+\end{frame}
