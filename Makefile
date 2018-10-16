@@ -7,5 +7,6 @@ vivek-jbt.pdf: main.tex
 	pdflatex --shell-escape main
 
 clean:
-	sudo rm -f vivek-jbt.pdf
-	rm *.out *.bcf *.aux *.xwm
+	rm -f vivek-jbt.pdf
+	rm -f *.out *.bcf *.aux *.xwm *.log *.snm *.nav
+	rm -rf _markdown_main/

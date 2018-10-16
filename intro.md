@@ -123,7 +123,7 @@ Start;
   \column{0.5\columnwidth}
   \vspace*{-0.2in}
 
-\lstinputlisting{./listings/threadedCompRegion-static.c}
+\lstinputlisting{./listings/threadedCompRegionStatic.c}
   \column{0.5\columnwidth}
 %  \includegraphics[scale=0.15]{./images/legend-dynamic}\\                                                                                                              
  \vspace*{-0.2in}
