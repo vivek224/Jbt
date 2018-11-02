@@ -40,29 +40,33 @@ int main(int argc, char** argv)
 
 ```
 
+
 \end{frame}
 
 
 ### Motivating Example Code: 2D Laplace with OpenMP
 
+
 ```C++, caption=
+
 #include <mpi.h>
 #include <omp.h>
 
 int main(int argc, char** argv)
 {
    MPI_Init() 
-while (timestep < T ) {
-Start; 
+while (timestep < T ) { 
 #pragma omp parallel for schedule(static, 4) reduce(+:sum) 
      {
        for(i=0; i<n; i++)
       	 sum += a[i]*b[i];
-           } 
-   Stop;
+     } 
+   
  MPI_Allreduce(...);
      timestep++;
- }
+   }
+
+}
 
 ```
 
@@ -71,13 +75,9 @@ Start;
 ### 3D Stencil Performance of Code on One Node
 
 %![alt text][histoStatic]
-
 %[histoStatic]: ./plots/IterTimingsHisto-static.png "Spread of Timings of %Outer Iterations of 3D Stencil" 
-
 %<img src="./plots/IterTimingsHisto-static.png" alt="histoStatic" %width="20"/>
-
 %TODO: figure out how to include the images .
-
 %![](./plots/IterTimingsHisto-static.png =250x)
 
 \begin{figure}[ht!]
@@ -85,9 +85,10 @@ Start;
 \caption{\label{fig:iterHisto}  Spread of timings of Outer Iterations of 3D Stencil.} 
 \end{figure}
 
-- Note two peaks; long tail (max at 9.5; min at 5.75)
-- Note each core has exactly the same work to do*
-- Hypothesis: transient "noise" from OS, and hardware variability
+	- Note two peaks; long tail (max at 9.5; min at 5.75)
+	- Note each core has exactly the same work to do*
+	- Hypothesis: transient "noise" from OS, and hardware variability
+
 
 \end{frame}
 
@@ -123,9 +124,9 @@ Start;
   \column{0.5\columnwidth}
   \vspace*{-0.2in}
 
-\lstinputlisting{./listings/threadedCompRegionStatic.c}
+\lstinputlisting{./listings/threadedCompRegion-static.c}
   \column{0.5\columnwidth}
-%  \includegraphics[scale=0.15]{./images/legend-dynamic}\\                                                                                                              
+  \includegraphics[scale=0.15]{./images/legend-dynamic}\\
  \vspace*{-0.2in}
   \begin{center}
     \includegraphics[scale=0.31]{images/threadedCompRegion-static}
@@ -152,7 +153,7 @@ Start;
 \end{columns}
 \begin{columns}
 \column{0.5\columnwidth}
-%TODO: fix code  to be hybrid sched                                                                                                                                     
+%TODO: fix code  to be hybrid sched
 \vspace*{-0.1in}
 \begin{figure}
 \lstinputlisting{./listings/threadedCompRegion-hybrid.c}
