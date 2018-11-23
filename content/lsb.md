@@ -21,7 +21,6 @@
   1. Having Charm++'s load balancer assign Charm++ objects, i.e., chares, to nodes.% (instead of cores).
   2. Using loop parallelism to distribute work within a node.
 
-
 %  \begin{figure}
 %    \begin{center}
 %      \includegraphics[width=0.75\columnwidth]{./images/CharmLdbWithLoop-manyChares}
@@ -34,7 +33,7 @@
 \end{frame}
 
 
-### Charm
+### Charm++ 
 
 %\begin{figure}[ht!]
 % \label{fig:charmBeforeAndAfterLdBCkLoop}
@@ -111,8 +110,7 @@
 ### Proposed Set of Techniques
   
 1. We decide on the combinations of advanced loop scheduling and advanced load balancing strategies to use.
-2. We either experimentally tune or use an automated technique to adjust parameters of load balancing and loop scheduler together to improve performance of applic\
-ation.
+2. We either experimentally tune or use an automated technique to adjust parameters of load balancing and loop scheduler together to improve performance of application.
 3. We then consider advanced load balancing and loop scheduling strategies that can help for the combined load balancing and loop scheduling technique.
 
 \end{frame}
@@ -170,18 +168,19 @@ tion region as a parameter to the function.
 
 ### Results
 
-\begin{figure}[ht!]
+    \begin{figure}[ht!]
           \begin{center}
          \subfloat[\tiny Dot Product on 4 nodes of Stampede.]{\includegraphics[width=.45\columnwidth]{plots/dotProd-4nodes-bw}}
  	    \subfloat[\tiny Particle-in-Cell on 4 nodes of Blue Waters.]{\includegraphics[width=.45\columnwidth]{plots/PIC-4nodes-bw}}
           \end{center}
           \caption{\tiny Execution times of scientific applications on multi-core clusters.}
 	  \label{fig:scalability-results-PIC-BW}
-        \end{figure}
+	  \end{figure}
 
-%- For dot product using 64 chares, a static fraction of 75\% with a chunk size of 8 gives the best performance, showing utility of adaptive loop scheduling.
+- For dot product using 64 chares, a static fraction of 75\% with a chunk size of 8 gives the best performance, showing utility of adaptive loop scheduling.
 - PIC using modified inter-node load balancing with adaptive loop scheduling is 19.13\% faster than PIC using adaptive scheduling without load balancing.
 - Synergistic performance improvements using combination of inter-node and intra-node load balancing.
+
 
 \end{frame}
 
@@ -195,15 +194,6 @@ tion region as a parameter to the function.
 
 \end{frame}
 
-
-%### Load Balancing and Loop Scheduling: Conclusion 
-
-%1. Need sophisticated loop scheduling in Charm++.
-%2. Described a technique and implementation to improve performance of applications.
-%3. Using our technique and implementation, we demonstrate performance improvement of %17.2\%.
-%4. For future work, we'll explore other adjustments to parameters of the Charm++ RTS to facilitate for loop scheduling.
-
-% \end{frame}
 
 
 ### Load Balancing and Loop Scheduling: Conclusion 

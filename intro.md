@@ -95,6 +95,7 @@ while (timestep < T ) {
 
 ### Transient Load Imbalance and its Potential Mitigation 
 
+
 \end{frame} 
 
 
@@ -117,23 +118,22 @@ while (timestep < T ) {
 
 
 
-
 \begin{frame}[label=hybridstatdyn]
+
 \frametitle{Hybrid Static/Dynamic Scheduling}
 \begin{columns}
   \column{0.5\columnwidth}
   \vspace*{-0.2in}
-
-\lstinputlisting{./listings/threadedCompRegion-static.c}
+  \lstinputlisting{./listings/threadedCompRegion-static.c}
   \column{0.5\columnwidth}
-  \includegraphics[scale=0.15]{./images/legend-dynamic}\\
+  \includegraphics[scale=0.15]{./images/legend-dynamic}
  \vspace*{-0.2in}
   \begin{center}
     \includegraphics[scale=0.31]{images/threadedCompRegion-static}
   \end{center}
   \vspace*{-0.4in}
   \begin{center}
-    \tiny Susceptible to imbalance.
+    {\tiny Susceptible to imbalance.}
   \end{center}
 \end{columns}
 \begin{columns}
@@ -165,10 +165,6 @@ while (timestep < T ) {
 \vspace*{-0.3in}
 \begin{center}
 {\tiny Can reduce imbalance and sched ovhd. simultaneously.}
-
-%\comments{through \hyperlink{expTunedSF}{tuning} static fraction.}                                                                                                     
-
 \end{center}
 \end{columns}
-
 \end{frame}

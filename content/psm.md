@@ -1,6 +1,4 @@
 
-
-
 ### Work on Application Code for X-ray Imaging at USC/ISI 
 
 1. Performance assessment
@@ -17,5 +15,6 @@
 
 - \small Obtained machine resources from University of Southern California's High Performance Computing Center.
 - \small Worked on proposal for Intel MICs to add to USC HPC system.
+
 
 \end{frame}

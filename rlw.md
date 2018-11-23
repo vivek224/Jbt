@@ -1,5 +1,3 @@
-
-
 ### Related Work 
 
 - OpenMP loop scheduling: Chapman, Sarkar, deSupinski.

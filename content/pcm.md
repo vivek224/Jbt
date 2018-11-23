@@ -1,9 +1,5 @@
 
-
-
-%\begin{frame}[label=workWithGPUs 
-
-### Efficient Simulation of Plasma Combustion of Clusters of GPUs}
+### Efficient Simulation of Plasma Combustion of Clusters of GPUs
 
 - \small The Need to Simulate of Plasma Combustion.
 - \small Working with scientists in physics and mechanical sciences to integrate my techniques in a real-world CFD application for Plasma Combustion.

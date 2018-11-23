@@ -4,8 +4,10 @@
 \item  In an OpenMP application in which work is scheduled to threads dynamically, \underline{data locality} is important for efficient execution of the application.
 \item Using the clause {\tt affinity} for task scheduling proposed for OpenMP 5.0 can improve data locality~\cite{ompaffclause}.
 \item However, strategies for tasking are fixed by OpenMP's runtime system, even with hints to the affinity clause.
-\item One can argue that this small set of strategies isn’t beneficial for all application-architecture pairs~\cite{worksteal99, Kulkarni08schedulingstrategies}. \nocite{Olivier:2012:CMW:2388996.2389085}
-\end{itemize} 
+\item One can argue that this small set of strategies isn’t beneficial for all application-architecture pairs~\cite{worksteal99, Kulkarni08schedulingstrategies}.
+
+\end{itemize}
+\nocite{Olivier:2012:CMW:2388996.2389085}
 \end{frame}
 
 \begin{frame}[label=posssoldlts]{A Possible Solution}
